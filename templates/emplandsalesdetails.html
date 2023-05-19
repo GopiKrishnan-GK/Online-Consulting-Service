@@ -1,0 +1,49 @@
+{% include "employeenavbar.html" %}
+<style>
+    .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+    form{
+       width: 40%;
+       float: center;
+    }
+    .pic-box{
+        width: 40%;
+        float:left;
+
+    }
+</style>
+<br><br><br><br><br>
+<div class="container">
+    
+   
+    <div class="col-8 my-5 pic-box">
+        <h2>Land for Sales</h2>
+        <img src="{{ house.image.url }}" class="card-image-top" alt="house" width="300" height="300" >
+    </div>
+            <div class="col-4 my-3 ">
+                <form action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {{ form.as_table}}
+                    </table>
+                    <a href="{% url 'employee-home' %}" class="btn btn-outline-secondary"><i>Go back</i></a>
+                    
+                    <button type="submit" class="btn btn-primary inline">{{ val}}</button>
+                    
+                 
+            </form>
+            
+            </div>
+           
+           
+            
+                
+            
+            
+</div>     
+
+{% include "footer.html" %}

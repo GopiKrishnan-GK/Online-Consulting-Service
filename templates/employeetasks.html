@@ -1,0 +1,16 @@
+{% include "employeenavbar.html" %}
+<br><br><br><br><br>
+<div class="container">
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+          <h1 class="display-5 fw-bold">Tasks</h1>
+          <ul>
+            <h2><a href="{% url 'taskhouseaintan' %}">House Maintanance</a></h2>
+            <h2><a href="{% url 'taskhousesales' %}">House Sales</a></h2>
+            <h2><a href="{% url 'tasklandsales' %}">Land Sales</a></h2>
+          </ul>
+           
+        </div>
+      </div>
+</div>
+{% include "footer.html" %}

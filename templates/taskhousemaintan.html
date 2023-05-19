@@ -1,0 +1,45 @@
+{% include "navbar.html" %}
+
+<br><br>
+<body>
+    <section class="bg-light py-4 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Houses For Maintanance</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+                {% for house in houses %}
+                <div class="col-md-4 col-lg-3">
+                    <div class="card my-4">
+                        <img src="{{ house.house_maintan.image.url }}" class="card-image-top" alt="house" width="150" height="100" size=10px >
+                        
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ house.house_maintan.specification}} House</h5>
+                            <p class="card-text">{{ house.house_maintan.sqft }} Sqft</p>
+                            <p class="card-text">{{ house.house_maintan.location }} Area</p>
+                            <p class="card-text">{{ house.house_maintan.regin }} Region</p>
+                            {% if house.house_maintan.use %}
+                            <p class="card-text">For Rent </p>
+                            {% else %}
+                            <p class="card-text">For Maintanance </p>
+                            {% endif %}
+                            <p class="card-text">
+                                <span class="float-end price">Rs.{{ house.house_maintan.rent }}/Month</span>
+                            </p>
+                            <a href="{% url 'emphousemaintandetails' house.house_maintan.id 'Update' %}" class="btn btn-primary btn-sm">Update status</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+    
+    
+     
+    
+
+
+    {% include "footer.html" %}

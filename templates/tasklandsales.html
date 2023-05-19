@@ -1,0 +1,41 @@
+{% include "employeenavbar.html" %}
+
+<br><br>
+<body>
+    <section class="bg-light py-4 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Lands For Sales</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+                {% for house in houses %}
+                <div class="col-md-4 col-lg-3">
+                    <div class="card my-4">
+                        <img src="{{ house.land_sales.image.url }}" class="card-image-top" alt="house" width="150" height="100" size=10px >
+                        
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">{{ house.land_sales.specification}} House</h5>
+                            <p class="card-text">{{ house.land_sales.sqft }} Sqft</p>
+                            <p class="card-text">{{ house.land_sales.location }} Area</p>
+                            <p class="card-text">{{ house.land_sales.regin }} Region</p>
+                            
+                            <p class="card-text">
+                                <span class="float-end price">Rs.{{ house.land_sales.price }}</span>
+                            </p>
+                            <a href="{% url 'emplandsalesdetails' house.land_sales.id 'Update' %}" class="btn btn-primary btn-sm">Update status</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+    
+    
+     
+    
+
+
+    {% include "footer.html" %}

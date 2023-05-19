@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Home</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include "employeenavbar.html" %} 
+    <br><br><br><br><br>
+
+{% if orders %}
+<hr class="my-4">
+<section class="bg-light py-4 my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+    <h1 align="center">House Maintanance</h1>
+    </div>
+    {% for o in orders %}
+    <div class="col-md-4 col-lg-4">
+        <div class="card my-4">
+            <img src="{{ o.image.url }}" class="card-image-top" alt="{{ o.specification}} House" width="250" height="200" size=10px >
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{ o.specification}} House</h5>
+                <p class="card-text">{{ o.sqft}} Sqft</p>
+                <p class="card-text">{{ o.location}} Area</p>
+                <p class="card-text">Address:{{ o.address }} </p>
+                <p class="card-text">About:{{ o.description }} </p>
+                {% if o.use %}
+                <p class="card-text">For Rent </p>
+                <p class="card-text">
+                    <span class="float-end price">Rs.{{ o.rent}}/Month</span>
+                </p>
+                {% else %}
+                <p class="card-text">For Maintanance </p>
+                {% endif %}
+                <a href="{% url 'emphousemaintandetails' o.id 'Take Order' %}" class="btn btn-primary btn-sm">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    </div>
+    </section>
+    
+    {% endif%}
+    {% if house_sale %}
+    <hr class="my-4">
+    <section class="bg-light py-4 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+    <h1 align="center">Houses for Sales</h1>
+    </div>
+    {% for o in house_sale %}
+    <div class="col-md-4 col-lg-4">
+        <div class="card my-4">
+            <img src="{{ o.image.url }}" class="card-image-top" alt="{{ o.specification}} House" width="250" height="200" size=10px >
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{ o.specification}} House</h5>
+                <p class="card-text">{{ o.sqft}} Sqft</p>
+                <p class="card-text">{{ o.location}} Area</p>
+                <p class="card-text">Address:{{ o.address }} </p>
+                <p class="card-text">About:{{ o.description }} </p>
+                <p class="card-text">
+                    <span class="float-end price">Rs.{{ o.price}}</span>
+                </p>
+                <a href="{% url 'emphousesalesdetails' o.id 'Take Order' %}" class="btn btn-primary btn-sm">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</section>
+   
+    {% endif %}
+    {% if land_sale %}
+    <hr class="my-4">
+    <section class="bg-light py-4 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+    <h1 align="center">Land for Sale</h1>
+    </div>
+    {% for o in land_sale %}
+    <div class="col-md-4 col-lg-3">
+        <div class="card my-4">
+            <img src="{{ o.image.url }}" class="card-image-top" alt="{{ o.specification}} House" width="250" height="200" size=10px >
+            <div class="card-body">
+                
+                <p class="card-text">{{ o.sqft}} Sqft</p>
+                <p class="card-text">{{ o.location}} Area</p>
+                <p class="card-text">Adress:{{ o.address }} </p>
+                <p class="card-text">About:{{ o.description }} </p>
+                <p class="card-text">
+                    <span class="float-end price">Rs.{{ o.price}}</span>
+                </p>
+                <a href="{% url 'emplandsalesdetails' o.id 'Take Order' %}" class="btn btn-primary btn-sm">Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+</section>
+
+
+
+    {% endif%}
+    {% if not land_sale and not orders and not house_sale %}
+    <h1 align="center">No New  Orders Yet!!</h1>
+
+    {% endif %}
+
+    {% include "footer.html" %} 
+</body>
+</html>

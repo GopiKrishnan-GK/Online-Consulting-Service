@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Services</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    <br><br>
+    <section class="bg-light py-4 my-5" style="min-height:600px;">
+        <div class="container">
+        <div class="row">
+        <div class="col-12">
+        <h4 class="mb-3"> Sales House Details </h4>
+        <hr style="border-color:#b8bfc2;">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index-page' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'housesales'  %}">House Sales index</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ house.specification }}</li>
+        </ol>
+        </nav>
+        
+        </div>
+        <div class="col-4 my-3 pic-box">
+       
+        <img src="{{house.image.url}}" class="card-image-top" alt="{{house.specification}}" height="300" width="300">
+        </div>
+        <div class="col-8 my-3">
+            <h5 class="my-2 text-primary">  Owner :{{ house.customer.user.username | upper}} </h5>
+        <h2 class="text-success">  {{house.specification }} House</h5>
+        <p>Square Feet: {{house.sqft}}</p>
+        <p>Address:{{house.address}}</p>
+        <p>Description: {{house.description}}</p>
+        <p>Area: {{house.location}}</p>
+        <h5 class="my-2 text-primary"><span class="float-start price ">Rs.{{ house.price }}</span></h5>
+        <div class=" col-8 my-5">
+        
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <button type="submit" class="btn btn-primary">Request Consultant</button>
+
+            </form>
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+    {% include "footer.html" %}
+</body>
+</html>

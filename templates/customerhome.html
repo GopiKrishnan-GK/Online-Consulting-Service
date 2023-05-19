@@ -1,0 +1,167 @@
+{% load static %}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Services | Customer Home</title>
+    <style>
+      
+        table tr{
+            border: 1px solid rgb(160, 22, 22);
+           
+        }
+        table td,table th {
+            border: 1px solid rgb(160, 22, 22);
+            border-style: double;
+            background-color: aquamarine;
+            text-align: center;
+            
+        }
+
+    </style>
+</head>
+<body>
+    {% include "customernavbar.html" %}
+    
+   
+    <div class="p-5 mb-8 bg-light rounded-3">
+        <div class="container py-5 col-md-5">
+          <i><h1 class="display-5 fw-bold">Customer Home</h1></i>
+          <p class="col-md-8 fs-4"> </p>
+          
+        </div>
+      </div>
+    {% if house %}
+    <h2 align="center">My House(s) For Maintanance</h2>
+    <table width="100%" cellpadding="10" cellspacing="10" >
+        <thead><th>image</th>
+            <th>specification</th>
+            <th>Square Feet</th>
+            <th>For Rent</th>
+            <th>Rent</th>
+            <th>Description</th>
+            <th>How Long</th>
+            <th>Address</th>
+            <th>Region</th>
+            <th>Status</th>
+            <th>Change</th>
+            <th>Remove</th>
+        </thead>
+          {% for h in house %} 
+          <tr>
+            <td> <img src="{{ h.image.url }}"  alt="{{ h.specification}}" class="card-image-top" width="250" height="200" size=10px ></td>
+        <td>
+            {{ h.specification}} House
+        </td> 
+        <td>
+            {{ h.sqft}} sqft Land
+        </td> 
+        <td>
+            {% if h.use %} 
+            <h2>YES</h2>
+            {% else %}
+            <h2>NO</h2>
+            {% endif  %}
+        </td>
+        <td>Rs.{{ h.rent|intcomma }}</td>
+        <td>{{ h.description }}</td>
+        <td> {{ h.time }} Months</td>
+        <td> {{ h.address }}</td>
+        <td> {{ h.regin }}</td>
+        <td> {{ h.status }}</td>
+        <td><a href="{% url 'customereditorder' 'House_maintan' h.id %}"  class="btn btn-primary btn-sm">Change</a></td>
+        <td><a href="{% url 'customerdeleteorder' 'House_maintan' h.id %}" onclick="return confirm('Are You Sure to Remove?')" class="btn btn-danger btn-sm">Remove</a></td>
+        </tr> 
+       
+          {% endfor %}
+
+    
+    </table>
+    {% endif %}
+    {% if house_sale %}
+    <h2 align="center">My House For Sale</h2>
+    
+
+    <table width="100%" cellpadding="10" cellspacing="10" >
+        <thead><th>image</th>
+            <th>specification</th>
+            <th>Square Feet</th>
+
+            
+           <th>Address</th>
+            <th>Description</th>
+            <th>Estimated Price</th>
+            <th>Status</th>
+            <th>Change</th>
+            <th>Remove</th>
+        </thead>
+          {% for h in house_sale %} 
+          <tr>
+            <td> <img src="{{ h.image.url }}" class="card-image-top" alt="{{ h.specification}}" width="250" height="200" size=10px ></td>
+        <td>
+            {{ h.specification }} House
+        </td> 
+        <td>
+            {{ h.sqft}} sqft Land
+        </td> 
+        <td>{{ h.address }}</td>
+        <td>{{ h.description }}</td>
+        <td>Rs.{{ h.price |intcomma}}</td>
+        <td>{{ h.status }}</td>
+        <td><a href="{% url 'customereditorder' 'House_sales' h.id %}"  class="btn btn-primary btn-sm">Change</a></td>
+        <td><a href="{% url 'customerdeleteorder' 'House_sales' h.id %}" onclick="return confirm('Are You Sure to Remove?')" class="btn btn-danger btn-sm">Remove</a></td>
+        </tr> 
+       
+          {% endfor %}
+
+    
+    </table>
+    {% endif %}
+    {% if land_sale %}
+    <h2 align="center">My Land For Sale</h2>
+    
+
+    <table width="100%" cellpadding="10" cellspacing="10" >
+        <thead><th>image</th>
+            
+            <th>Square Feet</th>
+
+            
+           <th>Address</th>
+            <th>Description</th>
+            <th>Estimated Price</th>
+            <th>Status</th>
+            <th>Change</th>
+            <th>Remove</th>
+        </thead>
+          {% for h in land_sale %} 
+          <tr>
+            <td> <img src="{{ h.image.url }}" class="card-image-top" alt="{{ h.specification}}" width="250" height="200" size=10px ></td>
+        
+        <td>
+            {{ h.sqft}} sqft Land
+        </td> 
+        <td>{{ h.address }}</td>
+        <td>{{ h.description }}</td>
+        <td>Rs.{{ h.price |intcomma}}</td>
+        <td>{{ h.status }}</td>
+        <td><a href="{% url 'customereditorder' 'land_sales' h.id %}"  class="btn btn-primary btn-sm">Change</a></td>
+        <td><a href="{% url 'customerdeleteorder' 'land_sales' h.id %}" onclick="return confirm('Are You Sure to Remove?')" class="btn btn-danger btn-sm">Remove</a></td>
+        </tr> 
+       
+          {% endfor %}
+
+    
+    </table>
+    {% endif %}
+    {% if not land_sale and not house and not house_sale %}
+    <h1 align="center">You have no Properties Uploaded</h1>
+
+    {% endif %}
+
+    {% include "footer.html" %}
+</body>
+</html>

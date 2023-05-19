@@ -1,0 +1,72 @@
+{% load static%}
+<style>
+      
+    table tr{
+        border: 1px solid rgb(160, 22, 22);
+       
+    }
+    table td,table th {
+        border: 1px solid rgb(160, 22, 22);
+        border-style: double;
+        background-color: aquamarine;
+        text-align: center;
+        
+    }
+
+</style>
+{% include "customernavbar.html" %}
+<br><br><br><br><br>
+<h1 align="center"><u><i>My Orders</i></u></h1>
+
+
+<div class="container">
+    <table width="100%" cellpadding="10" cellspacing="10">
+        <thead>
+            <th>image</th>
+            <th>Itm specification</th>
+            <th>Status</th>
+            <th>Remove</th>
+        </thead>
+        {% if itms %}
+        {% for f in itms %}
+        <tr>
+            {% if f.house_maintan %}
+            <td><img src="{{ f.house_maintan.image.url }}" alt="house image" height="200" width="250"></td>
+            <td>Rental House
+                <br><a href="{% url 'housedetails' f.house_maintan.id %}">Details</a>
+            </td>
+            <td>{{ f.status }} </td>
+            <td>
+                <a href="{% url 'removeorder' f.id %}" class="btn btn-danger" onclick="return confirm('Are You Sure to Remove?')">Remove</a>
+            </td>
+            {% endif %}
+            {% if f.house_sales %}
+            <td><img src="{{ f.house_sales.image.url }}" alt="house image" height="200" width="250"></td>
+            <td>House Sales
+                <br><a href="{% url 'housesalesdetails' f.house_sales.id %}">Details</a>
+            </td>
+            <td>{{ f.status }} </td>
+            <td>
+                <a href="{% url 'removeorder' f.id %}" class="btn btn-danger" onclick="return confirm('Are You Sure to Remove?')">Remove</a>
+            </td>
+            {% endif %}
+            {% if f.land_sales %}
+            <td><img src="{{ f.land_sales.image.url }}" alt="house image" height="200" width="250"></td>
+            <td>Land Sales
+                <br><a href="{% url 'landsalesdetails' f.land_sales.id %}">Details</a>
+            </td>
+            <td>{{ f.status }} </td>
+            <td>
+                <a href="{% url 'removeorder' f.id %}" class="btn btn-danger" onclick="return confirm('Are You Sure to Remove?')">Remove</a>
+            </td>
+            {% endif %}
+        </tr>
+
+        {% endfor %}
+        {% else %}
+        <h1><i><u>No orders Found</u></i> </h1>
+        {% endif %}
+
+    </table>
+</div>
+{% include "footer.html" %}

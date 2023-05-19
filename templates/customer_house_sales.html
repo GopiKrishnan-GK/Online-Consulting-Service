@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"> 
+  {% block title %}<title>Consultancy Services | House Sales</title>{% endblock %}
+  
+</head>
+<body>
+  {% include "navbar.html" %} 
+<br><br><br>
+<br>
+<div class="container">
+  <u><h1 align="center">House Sales</h1></u>
+<ul>
+  <h2><li><a href=" {% url 'addhousesales' %}">Add house For Sales</a></li></h2>
+  <h2><li><a href=" {% url 'housesales' %}">Houses For Sales</a></li></h2>
+ 
+</ul>
+</div>
+
+ 
+  {% include "footer.html" %} 
+
+  
+</body>
+</html>

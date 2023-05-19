@@ -1,0 +1,183 @@
+{% load cusfilters%}
+{% load static%}
+{% load widget_tweaks %}
+<head>
+    <style>
+      
+        table tr{
+            border: 1px solid rgb(160, 22, 22);
+           
+        }
+        table td,table th {
+            border: 1px solid rgb(160, 22, 22);
+            border-style: double;
+            background-color: aquamarine;
+            text-align: center;
+            
+        }
+
+    </style>
+</head>
+    {% include "employeenavbar.html"%}
+<br><br><br><br><br>
+<div class="container">
+    {% if orders_e1 and orders_c1 %}
+    <hr class="my-4">
+    <h1 align="center">Rental Houses</h1>
+   
+    <table width="100%">
+        <thead>
+            <th>Image</th>
+            <th>House Details</th>
+            <th>Owner</th>
+            <th>Rent</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Update Status</th>
+        </thead>
+        
+        {% for e in orders_e1 %}
+        <tr>
+            
+            <td><img src="{{e.house_maintan.image.url}}" height="200" width="200" alt="{{e.house_maintan.specification}}"></td>
+           <td>{{e.house_maintan.specification}}
+            <br> <a href="{% url 'emphousemaintandetails' e.house_maintan.id 'True' %}" class="btn btn-outline-secondary">Details</a>
+           </td>
+           <td>{{e.house_maintan.customer.user.username}} <br>
+            <a href="{% url 'customerinfo' e.house_maintan.customer.id %}">Check informations</a></td>
+           <td>{{e.house_maintan.rent}}</td>
+            
+            {% for c in orders_c1%}
+            {% if c.house_maintan.id == e.house_maintan.id %}
+            <td>{{c.customer.user.username}} <br>
+                <a href="{% url 'customerinfo' c.customer.id %}">Check informations</a>
+            </td>
+            <td>{{c.status}}</td>
+            <td>
+                <form action="" method="post" enctype="multipart/form-data">
+                   {% csrf_token %}
+                   <select name="status" id="status">
+                    <option value="" disabled selected hidden >Select</option>
+                    <option value="Submited">Submited</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Success">Success</option>
+                    <option value="Order Cancled">Order Cancled</option>
+                   </select>
+                    <input type="hidden" name="id"  value="{{c.id}}">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+            {% endif %}
+            {% endfor %}
+           
+            {% endfor %}
+    </table>
+    {%endif%}
+
+    {% if orders_e2 and orders_c2 %}
+    <hr class="my-4">
+    <h1 align="center"> Houses Sales</h1>
+    
+    <table width="100%">
+        <thead>
+            <th>Image</th>
+            <th>House details</th>
+            <th>Owner</th>
+            <th>Price</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Update Status</th>
+        </thead>
+        <tr>
+            {% for e in orders_e2 %}
+            <td><img src="{{e.house_sales.image.url}}" height="200" width="200" alt="{{e.house_sales.details}}"></td>
+           <td>{{e.house_sales.specification}}
+            <br> <a href="{% url 'emphousesalesdetails' e.house_sales.id 'True' %}" class="btn btn-outline-secondary">Details</a>
+           </td>
+           <td>{{e.house_sales.customer.user.username}} <br>
+            <a href="{% url 'customerinfo' e.house_sales.customer.id %}">Check informations</a></td>
+           <td>{{e.house_sales.price}}</td>
+          
+            {% for c in orders_c2%}
+            {% if c.house_sales.id == e.house_sales.id %}
+            <td>{{c.customer.user.username}} <br>
+                <a href="{% url 'customerinfo' c.customer.id %}">Check informations</a>
+            </td>
+            <td>{{c.status}}</td>
+            <td>
+                <form action="" method="post" enctype="multipart/form-data">
+                   {% csrf_token %}
+                   <select name="status" id="status" >
+                    <option value="" disabled selected hidden >Select</option>
+                    <option value="Submited">Submited</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Success">Success</option>
+                    <option value="Order Cancled">Order Cancled</option>
+                   </select>
+                    <input type="hidden" name="id"  value="{{c.id}}">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+            {% endif %}
+            {% endfor %}
+            {% endfor %} 
+        </tr>
+    </table>
+{% endif %}
+{% if orders_e3 and orders_c3 %}
+<hr class="my-4">
+    <h1 align="center"> Land Sales</h1>
+    
+    <table width="100%">
+        <thead>
+            <th>Image</th>
+            <th>Land Details</th>
+            <th>Owner</th>
+            <th>Price</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Update Status</th>
+        </thead>
+        <tr>
+            {% for e in orders_e3 %}
+            <td><img src="{{e.land_sales.image.url}}" height="200" width="200" alt="{{e.land_sales.sqft}}"></td>
+           <td>{{e.land_sales.sqft}} Sqft Land <br>
+          <a href="{% url 'emplandsalesdetails' e.land_sales.id 'True' %}" class="btn btn-outline-secondary">Details</a></td>
+           <td>{{e.land_sales.customer.user.username}} <br>
+            <a href="{% url 'customerinfo' e.land_sales.customer.id %}">Check informations</a></td>
+           <td>{{e.land_sales.price}}</td>
+            {% for c in orders_c3%}
+            {% if c.land_sales.id == e.land_sales.id %}
+            <td>{{c.customer.user.username}} <br>
+                <a href="{% url 'customerinfo' c.customer.id %}">Check informations</a>
+            </td>
+            <td>{{c.status}}</td>
+            <td>
+                <form action="" method="post" enctype="multipart/form-data">
+                   {% csrf_token %}
+                   <select name="status" id="status">
+                    <option value="" disabled selected hidden >Select</option>
+                    <option value="Submited">Submited</option>
+                    <option value="Processing">Processing</option>
+                    <option value="Success">Success</option>
+                    <option value="Order Cancled">Order Cancled</option>
+                   </select>
+                    <input type="hidden" name="id"  value="{{c.id}}">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+            </td>
+            {% endif %}
+            {% endfor %}
+            {% endfor %} 
+        </tr>
+    </table>
+    {%endif%}
+    {% if not  orders_e1 and not orders_c1 and not orders_e2 and not orders_c2 and not orders_e3 and not orders_c3 %}
+    <h1 align="center"><i>No Orders Yet</i>
+    </h1>
+    {% endif %}
+</div>
+
+
+{% include "footer.html" %}

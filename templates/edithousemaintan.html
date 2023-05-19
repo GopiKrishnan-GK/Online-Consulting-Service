@@ -1,0 +1,58 @@
+
+    {% include "navbar.html" %}
+    <br><br><br><br>
+    <div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Edit House Details</h1>
+        <hr class="my-4">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+            <label for="" class="form-label">House Image</label>
+            {{form.image}}
+            </div>
+            <div class="mb-4">
+            <label for="" class="form-label">Square Feet</label>
+            {{form.sqft }}
+            </div>
+            <div class="mb-4">
+            <label for="" class="form-label">House Category</label>
+            {{form.specification}}
+            </div>
+            <div class="mb-4">
+            <label for="" class="form-label">Region</label>
+            {{form.regin}}
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">House Location</label>
+                {{form.location}}
+                </div>
+                <div class="mb-4">
+                    <label for="" class="form-label">House Address</label>
+                    {{form.address}}
+                    </div>
+                    <div class="mb-4">
+                        <label for="" class="form-label">For rent?</label>
+                        {{form.use}}
+                        </div>
+                        <div class="mb-4">
+                            <label for="" class="form-label">How Long we maintain?(In months)</label>
+                            {{form.time}}
+                            </div>
+                            <div class="mb-4">
+                                <label for="" class="form-label">About House(description)</label>
+                                {{form.description}}
+                                </div>
+        
+            <button type="submit" class="btn btn-primary">Enter</button>
+        </form>
+        
+
+        
+        
+      </div>
+    </div>
+   
+    {% include "footer.html" %}
+    
+    

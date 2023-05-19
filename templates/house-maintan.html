@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>House Maintanance</title>
+
+</head>
+{% include "navbar.html" %}
+
+<br><br>
+<body>
+    <section class="bg-light py-4 my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-3">Rental Houses</h4>
+                    <hr style="border-color:#b8bfc2;">
+                </div>
+                {% for house in houses %}
+                <div class="col-md-4 col-lg-3">
+                    <div class="card my-4">
+                        <img src="{{ house.image.url }}" class="card-image-top" alt="house" width="150" height="100" size=10px >
+                         
+                        <div class="card-body">
+                            <a href="{% url 'favourite' 'House_maintan' house.id %}"><p class="card-text"><i class="fa fa-heart" style="color: #ff0080;"></i>Favourite</p></a>
+                            <h5 class="card-title text-primary">{{ house.specification}} House</h5>
+                            <p class="card-text">{{ house.sqft }} Sqft</p>
+                            <p class="card-text">{{ house.location }} Area</p>
+                            <p class="card-text">{{ house.regin }} Region</p>
+                            <p class="card-text">
+                                <span class="float-end price">Rs.{{ house.rent }}/Month</span>
+                            </p>
+                            <a href="{% url 'housedetails' house.id %}" class="btn btn-primary btn-sm">Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </section>
+    
+    
+     
+    
+
+
+    {% include "footer.html" %}
+</body>
+</html>

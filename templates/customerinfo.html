@@ -1,0 +1,27 @@
+{% include "employeenavbar.html"%}
+
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+      <h1 class="display-5 fw-bold">Customer Details</h1>
+
+      <div class=" container col-md-8 fs-4"><table>
+        <tr><td> Customer Name</td>
+        <td>:{{customer.user.username}}</td></tr>
+        <tr>
+            <td>Address</td>
+            <td>:{{customer.address}}</td>
+        </tr>
+        <tr>
+            <td>Mobile Number</td>
+            <td>:{{customer.mobile}}</td>
+        </tr>
+        <tr>
+            <td>Email Address</td>
+            <td>:{{customer.user.email}}</td>
+        </tr>
+      </table><br>
+        <a href="{%  url 'emporders' %}" class="btn btn-outline-primary">Go Back</a>
+    </div>
+    </div>
+  </div>
+{% include "footer.html" %}

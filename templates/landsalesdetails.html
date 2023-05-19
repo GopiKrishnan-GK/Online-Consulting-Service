@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultancy Services</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    <br><br>
+    <section class="bg-light py-4 my-5" style="min-height:600px;">
+        <div class="container">
+        <div class="row">
+        <div class="col-12">
+        <h4 class="mb-3"> Land Details</h4>
+        <hr style="border-color:#b8bfc2;">
+        <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{% url 'index-page' %}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{% url 'landsaleslist'  %}">Lands for sale</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Land</li>
+        </ol>
+        </nav>
+        
+        </div>
+        <div class="col-4 my-3 pic-box">
+       
+        <img src="{{land.image.url}}" class="card-image-top" alt="Land" height="300" width="300">
+        </div>
+        <div class="col-8 my-3">
+            <h5 class="my-2 text-primary">Owner :{{ land.customer.user.username | upper}} </h5>
+       
+        <p>Square Feet: {{land.sqft}}</p>
+        <p>Address:{{land.address}}</p>
+        <p>Address:{{land.location}}</p>
+        <p text-align="left">Description: {{house.description}}</p>
+        <h5 class="my-2 text-primary"><span class="float-start price ">Rs.{{ land.price }}</span></h5>
+        <div class="my-5">
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <button type="submit" class="btn btn-primary">Request Consultant</button>
+
+            </form>
+     
+        </div>
+        </div>
+        </div>
+        </div>
+        </section>
+    {% include "footer.html" %}
+</body>
+</html>

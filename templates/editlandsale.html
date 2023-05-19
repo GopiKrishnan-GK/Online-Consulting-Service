@@ -1,0 +1,42 @@
+{% include "navbar.html" %}
+    <br><br><br><br>
+    <div class="container">
+    <div class="jumbotron">
+        <h1 class="display-4">Edit Land Details</h1>
+        <hr class="my-4">
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+            <label for="" class="form-label">Land Image</label>
+            {{form.image}}
+            </div>
+            <div class="mb-4">
+            <label for="" class="form-label">Square Feet</label>
+            {{form.sqft }}
+            </div>
+            
+            <div class="mb-4">
+            <label for="" class="form-label">Region</label>
+            {{form.regin}}
+            </div>
+            <div class="mb-4">
+                <label for="" class="form-label">Land Location</label>
+                {{form.location}}
+                </div>
+                <div class="mb-4">
+                    <label for="" class="form-label">Land full Address</label>
+                    {{form.address}}
+                    </div>
+                            <div class="row">
+                                <label for="" class="form-label col-2">About Land (description)</label>
+                                <div class="col-8">{{form.description}}</div>
+                                
+                                </div>
+        
+            <button type="submit" class="btn btn-primary">Enter</button>
+        </form>
+      </div>
+    </div>
+   
+    {% include "footer.html" %}
+    
